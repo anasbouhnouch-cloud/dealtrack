@@ -5,19 +5,27 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
-export default function LoginPage() {
+export default function ResetPasswordPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [confirm, setConfirm] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (password !== confirm) {
+      setError('Passwords do not match.')
+      return
+    }
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters.')
+      return
+    }
     setError('')
     setLoading(true)
     const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { error } = await supabase.auth.updateUser({ password })
     if (error) {
       setError(error.message)
       setLoading(false)
@@ -37,7 +45,7 @@ export default function LoginPage() {
           <Link href="/" className="text-xl font-bold tracking-tight">
             <span className="text-white">Deal</span><span className="text-[#7C3AED]">Track</span>
           </Link>
-          <p className="text-sm text-zinc-500 mt-1.5">Welcome back</p>
+          <p className="text-sm text-zinc-500 mt-1.5">Choose a new password</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-[#111111] border border-white/[0.08] rounded-xl p-6 space-y-4">
@@ -47,23 +55,25 @@ export default function LoginPage() {
             </div>
           )}
           <div>
-            <label className={labelClass}>Email</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className={inputClass}
-              placeholder="you@example.com"
-            />
-          </div>
-          <div>
-            <label className={labelClass}>Password</label>
+            <label className={labelClass}>New password</label>
             <input
               type="password"
               required
+              minLength={6}
               value={password}
               onChange={e => setPassword(e.target.value)}
+              className={inputClass}
+              placeholder="••••••••"
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Confirm password</label>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={confirm}
+              onChange={e => setConfirm(e.target.value)}
               className={inputClass}
               placeholder="••••••••"
             />
@@ -71,24 +81,11 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-violet-600 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-violet-700 transition-all duration-200 disabled:opacity-50 mt-1"
+            className="w-full bg-violet-600 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-violet-700 transition-all duration-200 disabled:opacity-50"
           >
-            {loading ? 'Signing in…' : 'Sign in'}
+            {loading ? 'Updating…' : 'Set new password'}
           </button>
-
-          <div className="text-center">
-            <Link href="/forgot-password" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
-              Forgot your password?
-            </Link>
-          </div>
         </form>
-
-        <p className="text-center text-sm text-zinc-500 mt-5">
-          No account?{' '}
-          <Link href="/signup" className="text-violet-400 font-medium hover:text-violet-300 transition-colors">
-            Sign up
-          </Link>
-        </p>
       </div>
     </div>
   )

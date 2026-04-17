@@ -4,6 +4,8 @@ import { Plus, TrendingUp, Clock, AlertCircle, CheckCircle2 } from 'lucide-react
 import { formatCurrency, formatDate, daysUntil, isOverdue, statusColor, statusLabel } from '@/lib/utils'
 import { Deal } from '@/types'
 import { startOfMonth, endOfMonth } from 'date-fns'
+import ReferralCard from '@/components/ReferralCard'
+import OnboardingGuide from '@/components/OnboardingGuide'
 
 function StatCard({ title, value, sub, icon }: { title: string; value: string; sub?: string; icon: React.ReactNode }) {
   return (
@@ -28,7 +30,13 @@ export default async function DashboardPage() {
     .eq('user_id', user!.id)
     .order('created_at', { ascending: false })
 
+  const { data: referrals } = await supabase
+    .from('referrals')
+    .select('id')
+    .eq('referrer_id', user!.id)
+
   const allDeals: Deal[] = deals ?? []
+  const referralCount = referrals?.length ?? 0
   const now = new Date()
   const monthStart = startOfMonth(now).toISOString().split('T')[0]
   const monthEnd = endOfMonth(now).toISOString().split('T')[0]
@@ -118,6 +126,11 @@ export default async function DashboardPage() {
         </div>
       )}
 
+      {/* Referral */}
+      <div className="mb-6">
+        <ReferralCard userId={user!.id} referralCount={referralCount} />
+      </div>
+
       {/* Active deals list */}
       <div>
         <h2 className="text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-3">Active deals</h2>
@@ -156,6 +169,9 @@ export default async function DashboardPage() {
           </div>
         )}
       </div>
+
+      {/* Onboarding — shows for new users with no deals, dismissed via localStorage */}
+      <OnboardingGuide show={allDeals.length === 0} />
     </div>
   )
 }

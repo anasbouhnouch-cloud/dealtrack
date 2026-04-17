@@ -182,8 +182,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/[0.06] py-8 text-center text-sm text-zinc-600">
-        © {new Date().getFullYear()} DealTrack
+      <footer className="border-t border-white/[0.06] py-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <span className="font-bold text-base tracking-tight">
+            <span className="text-white">Deal</span><span className="text-[#7C3AED]">Track</span>
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-600">
+            <Link href="/about" className="hover:text-zinc-400 transition-colors">About</Link>
+            <Link href="/changelog" className="hover:text-zinc-400 transition-colors">Changelog</Link>
+            <Link href="/contact" className="hover:text-zinc-400 transition-colors">Contact</Link>
+            <Link href="/privacy" className="hover:text-zinc-400 transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-zinc-400 transition-colors">Terms</Link>
+          </div>
+          <span className="text-zinc-700 text-sm">© {new Date().getFullYear()} DealTrack</span>
+        </div>
       </footer>
     </div>
   )
