@@ -24,7 +24,7 @@ export default async function NewDealPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-zinc-900 mb-6">New deal</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-6">New deal</h1>
       <DealForm userId={user.id} plan={plan} activeDealsCount={activeDealsCount} />
     </div>
   )

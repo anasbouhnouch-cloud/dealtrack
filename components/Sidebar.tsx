@@ -29,9 +29,9 @@ export default function Sidebar({ plan }: SidebarProps) {
   }
 
   return (
-    <aside className="w-56 shrink-0 hidden md:flex flex-col border-r border-zinc-100 bg-white min-h-screen px-3 py-4">
-      <div className="px-2 mb-6">
-        <span className="font-bold text-zinc-900 text-lg tracking-tight">DealTrack</span>
+    <aside className="w-56 shrink-0 hidden md:flex flex-col border-r border-white/[0.08] bg-[#0A0A0A] min-h-screen px-3 py-4">
+      <div className="px-2 mb-7">
+        <span className="font-bold text-white text-base tracking-tight">DealTrack</span>
       </div>
 
       <nav className="flex-1 space-y-0.5">
@@ -40,10 +40,10 @@ export default function Sidebar({ plan }: SidebarProps) {
             key={href}
             href={href}
             className={cn(
-              'flex items-center gap-2.5 px-2 py-2 rounded-lg text-sm transition-colors',
+              'flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-all duration-200',
               pathname === href || pathname.startsWith(href + '/')
-                ? 'bg-zinc-100 text-zinc-900 font-medium'
-                : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50'
+                ? 'bg-white/[0.08] text-zinc-100 font-medium'
+                : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04]'
             )}
           >
             <Icon className="w-4 h-4 shrink-0" />
@@ -52,24 +52,26 @@ export default function Sidebar({ plan }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="space-y-1 border-t border-zinc-100 pt-3 mt-3">
+      <div className="space-y-1 border-t border-white/[0.08] pt-3 mt-3">
         {plan === 'free' && (
           <Link
             href="/upgrade"
-            className="flex items-center gap-2 px-2 py-2 rounded-lg text-sm text-amber-700 bg-amber-50 hover:bg-amber-100 transition-colors font-medium"
+            className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-sm text-violet-400 bg-violet-500/10 hover:bg-violet-500/15 border border-violet-500/20 transition-all duration-200 font-medium"
           >
             <Zap className="w-4 h-4 shrink-0" />
             Upgrade to Pro
           </Link>
         )}
         {plan === 'pro' && (
-          <div className="px-2 py-1.5 flex items-center gap-1.5">
-            <span className="text-xs bg-zinc-900 text-white px-1.5 py-0.5 rounded-full font-medium">PRO</span>
+          <div className="px-2.5 py-1.5 flex items-center gap-1.5">
+            <span className="text-xs bg-violet-600 text-white px-2 py-0.5 rounded-full font-medium tracking-wide">
+              PRO
+            </span>
           </div>
         )}
         <button
           onClick={handleSignOut}
-          className="w-full flex items-center gap-2.5 px-2 py-2 rounded-lg text-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors"
+          className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] transition-all duration-200"
         >
           <LogOut className="w-4 h-4 shrink-0" />
           Sign out

@@ -32,66 +32,71 @@ export default function SignupPage() {
     }
   }
 
+  const inputClass = 'w-full bg-[#0A0A0A] border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/40 transition-all duration-200'
+  const labelClass = 'block text-sm font-medium text-zinc-400 mb-1.5'
+
   return (
-    <div className="min-h-screen bg-zinc-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <Link href="/" className="text-xl font-bold tracking-tight text-zinc-900">DealTrack</Link>
-          <p className="text-sm text-zinc-500 mt-1">Create your account</p>
+          <Link href="/" className="text-xl font-bold tracking-tight text-white">DealTrack</Link>
+          <p className="text-sm text-zinc-500 mt-1.5">Create your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white border border-zinc-200 rounded-xl p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-[#111111] border border-white/[0.08] rounded-xl p-6 space-y-4">
           {error && (
-            <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+            <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
               {error}
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-zinc-700 mb-1">Full name</label>
+            <label className={labelClass}>Full name</label>
             <input
               type="text"
               required
               value={fullName}
               onChange={e => setFullName(e.target.value)}
-              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900"
+              className={inputClass}
               placeholder="Alex Johnson"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-zinc-700 mb-1">Email</label>
+            <label className={labelClass}>Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900"
+              className={inputClass}
               placeholder="you@example.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-zinc-700 mb-1">Password</label>
+            <label className={labelClass}>Password</label>
             <input
               type="password"
               required
               minLength={6}
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900"
+              className={inputClass}
               placeholder="••••••••"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-zinc-900 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-zinc-700 transition-colors disabled:opacity-50"
+            className="w-full bg-violet-600 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-violet-700 transition-all duration-200 disabled:opacity-50 mt-1"
           >
             {loading ? 'Creating account…' : 'Create account'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-zinc-500 mt-4">
+        <p className="text-center text-sm text-zinc-500 mt-5">
           Already have an account?{' '}
-          <Link href="/login" className="text-zinc-900 font-medium hover:underline">Sign in</Link>
+          <Link href="/login" className="text-violet-400 font-medium hover:text-violet-300 transition-colors">
+            Sign in
+          </Link>
         </p>
       </div>
     </div>

@@ -73,19 +73,24 @@ export default function DealForm({ deal, userId, plan, activeDealsCount }: DealF
     router.refresh()
   }
 
-  const inputClass = 'w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 bg-white'
-  const labelClass = 'block text-sm font-medium text-zinc-700 mb-1'
+  const inputClass = 'w-full bg-[#0A0A0A] border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/40 transition-all duration-200'
+  const labelClass = 'block text-sm font-medium text-zinc-400 mb-1.5'
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-zinc-200 rounded-xl p-6 space-y-5 max-w-2xl">
+    <form onSubmit={handleSubmit} className="bg-[#111111] border border-white/[0.08] rounded-xl p-6 space-y-5 max-w-2xl">
       {error && (
-        <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">{error}</div>
+        <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+          {error}
+        </div>
       )}
 
       {wouldExceedLimit && (
-        <div className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+        <div className="text-sm text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
           Free plan limit reached ({FREE_LIMIT} active deals).{' '}
-          <a href="/upgrade" className="font-medium underline">Upgrade to Pro</a> for unlimited.
+          <a href="/upgrade" className="font-medium underline hover:text-amber-300 transition-colors">
+            Upgrade to Pro
+          </a>{' '}
+          for unlimited.
         </div>
       )}
 
@@ -162,7 +167,9 @@ export default function DealForm({ deal, userId, plan, activeDealsCount }: DealF
         </div>
 
         <div className="sm:col-span-2">
-          <label className={labelClass}>Notes <span className="text-zinc-400 font-normal">(optional)</span></label>
+          <label className={labelClass}>
+            Notes <span className="text-zinc-600 font-normal">(optional)</span>
+          </label>
           <textarea
             value={form.notes}
             onChange={e => update('notes', e.target.value)}
@@ -177,14 +184,14 @@ export default function DealForm({ deal, userId, plan, activeDealsCount }: DealF
         <button
           type="submit"
           disabled={loading || wouldExceedLimit}
-          className="bg-zinc-900 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-zinc-700 transition-colors disabled:opacity-50"
+          className="bg-violet-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-violet-700 transition-all duration-200 disabled:opacity-50"
         >
           {loading ? 'Saving…' : isEdit ? 'Save changes' : 'Create deal'}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+          className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors duration-200"
         >
           Cancel
         </button>
@@ -193,7 +200,7 @@ export default function DealForm({ deal, userId, plan, activeDealsCount }: DealF
             type="button"
             onClick={handleDelete}
             disabled={loading}
-            className="ml-auto text-sm text-red-500 hover:text-red-700 transition-colors"
+            className="ml-auto text-sm text-red-500/70 hover:text-red-400 transition-colors duration-200"
           >
             Delete deal
           </button>

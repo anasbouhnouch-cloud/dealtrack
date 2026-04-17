@@ -30,10 +30,10 @@ export function isOverdue(date: string): boolean {
 
 export function statusColor(status: DealStatus): string {
   switch (status) {
-    case 'negotiating': return 'text-yellow-600 bg-yellow-50 border-yellow-200'
-    case 'confirmed': return 'text-blue-600 bg-blue-50 border-blue-200'
-    case 'delivered': return 'text-purple-600 bg-purple-50 border-purple-200'
-    case 'paid': return 'text-green-600 bg-green-50 border-green-200'
+    case 'negotiating': return 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+    case 'confirmed': return 'text-blue-400 bg-blue-500/10 border-blue-500/20'
+    case 'delivered': return 'text-violet-400 bg-violet-500/10 border-violet-500/20'
+    case 'paid': return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
   }
 }
 

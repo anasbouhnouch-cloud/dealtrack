@@ -19,14 +19,14 @@ export default function CancelSubscriptionButton() {
   return (
     <div>
       {message && (
-        <div className="text-sm text-zinc-600 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2 mb-3">
+        <div className="text-sm text-zinc-400 bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 mb-3">
           {message}
         </div>
       )}
       <button
         onClick={handleCancel}
         disabled={loading}
-        className="text-sm text-red-500 hover:text-red-700 transition-colors disabled:opacity-50"
+        className="text-sm text-red-500/70 hover:text-red-400 transition-colors duration-200 disabled:opacity-50"
       >
         {loading ? 'Cancelling…' : 'Cancel subscription'}
       </button>

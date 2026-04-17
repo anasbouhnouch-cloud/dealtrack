@@ -33,11 +33,11 @@ export default async function DealsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-zinc-900">Deals</h1>
+        <h1 className="text-xl font-bold text-zinc-100">Deals</h1>
         {atLimit ? (
           <Link
             href="/upgrade"
-            className="flex items-center gap-1.5 bg-amber-500 text-white text-sm px-3 py-2 rounded-lg hover:bg-amber-600 transition-colors"
+            className="flex items-center gap-1.5 bg-amber-500/10 text-amber-400 border border-amber-500/20 text-sm px-3.5 py-2 rounded-lg hover:bg-amber-500/15 transition-all duration-200 font-medium"
           >
             <Lock className="w-4 h-4" />
             Upgrade for more
@@ -45,7 +45,7 @@ export default async function DealsPage() {
         ) : (
           <Link
             href="/deals/new"
-            className="flex items-center gap-1.5 bg-zinc-900 text-white text-sm px-3 py-2 rounded-lg hover:bg-zinc-700 transition-colors"
+            className="flex items-center gap-1.5 bg-violet-600 text-white text-sm px-3.5 py-2 rounded-lg hover:bg-violet-700 transition-all duration-200 font-medium"
           >
             <Plus className="w-4 h-4" />
             New deal
@@ -54,22 +54,25 @@ export default async function DealsPage() {
       </div>
 
       {plan === 'free' && (
-        <div className="mb-4 text-sm text-zinc-500 bg-white border border-zinc-200 rounded-lg px-4 py-3">
-          Free plan: <strong>{activeDeals.length}/{FREE_DEAL_LIMIT}</strong> active deals used.{' '}
-          <Link href="/upgrade" className="text-zinc-900 font-medium hover:underline">Upgrade to Pro</Link> for unlimited.
+        <div className="mb-4 text-sm text-zinc-500 bg-[#111111] border border-white/[0.08] rounded-lg px-4 py-3">
+          Free plan: <strong className="text-zinc-300">{activeDeals.length}/{FREE_DEAL_LIMIT}</strong> active deals used.{' '}
+          <Link href="/upgrade" className="text-violet-400 font-medium hover:text-violet-300 transition-colors">
+            Upgrade to Pro
+          </Link>{' '}
+          for unlimited.
         </div>
       )}
 
       {sorted.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-zinc-200 rounded-xl">
-          <p className="text-zinc-400 text-sm mb-3">No deals yet</p>
-          <Link href="/deals/new" className="text-sm text-zinc-900 font-medium hover:underline">
+        <div className="text-center py-20 bg-[#111111] border border-white/[0.08] rounded-xl">
+          <p className="text-zinc-600 text-sm mb-3">No deals yet</p>
+          <Link href="/deals/new" className="text-sm text-violet-400 font-medium hover:text-violet-300 transition-colors">
             Create your first deal →
           </Link>
         </div>
       ) : (
-        <div className="bg-white border border-zinc-200 rounded-xl overflow-hidden">
-          <div className="hidden sm:grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 px-4 py-2.5 border-b border-zinc-100 text-xs font-medium text-zinc-400 uppercase tracking-wider">
+        <div className="bg-[#111111] border border-white/[0.08] rounded-xl overflow-hidden">
+          <div className="hidden sm:grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 px-4 py-3 border-b border-white/[0.06] text-xs font-medium text-zinc-600 uppercase tracking-wider">
             <span>Brand</span>
             <span>Amount</span>
             <span>Platform</span>
@@ -80,10 +83,10 @@ export default async function DealsPage() {
             <Link
               key={deal.id}
               href={`/deals/${deal.id}`}
-              className={`grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-2 sm:gap-4 px-4 py-3.5 hover:bg-zinc-50 transition-colors ${i !== 0 ? 'border-t border-zinc-100' : ''}`}
+              className={`grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-2 sm:gap-4 px-4 py-3.5 hover:bg-white/[0.03] transition-all duration-200 ${i !== 0 ? 'border-t border-white/[0.06]' : ''}`}
             >
-              <span className="font-medium text-zinc-900 text-sm">{deal.brand_name}</span>
-              <span className="text-sm text-zinc-700 font-medium">{formatCurrency(deal.amount, deal.currency)}</span>
+              <span className="font-medium text-zinc-100 text-sm">{deal.brand_name}</span>
+              <span className="text-sm text-zinc-300 font-medium">{formatCurrency(deal.amount, deal.currency)}</span>
               <span className="text-sm text-zinc-500">{deal.platform}</span>
               <span className="text-sm text-zinc-500">{formatDate(deal.delivery_deadline)}</span>
               <span>

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #111111;
+  --background: #0A0A0A;
+  --foreground: #F4F4F5;
 }
 
 @theme inline {
@@ -21,4 +21,14 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* Native date/select inputs dark styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+}
+
+select option {
+  background-color: #111111;
+  color: #F4F4F5;
 }

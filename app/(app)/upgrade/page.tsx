@@ -18,15 +18,16 @@ export default async function UpgradePage() {
 
   return (
     <div className="max-w-md mx-auto">
-      <h1 className="text-xl font-bold text-zinc-900 mb-2">Upgrade to Pro</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-2">Upgrade to Pro</h1>
       <p className="text-zinc-500 text-sm mb-8">Unlock unlimited deals and automatic email reminders.</p>
 
-      <div className="bg-white border-2 border-zinc-900 rounded-xl p-7">
-        <div className="text-3xl font-bold text-zinc-900 mb-1">
-          $9<span className="text-base font-normal text-zinc-400">/month</span>
+      <div className="bg-[#111111] border border-violet-500/40 rounded-xl p-7 shadow-[0_0_50px_rgba(124,58,237,0.1)]">
+        <div className="text-xs font-medium text-violet-400 uppercase tracking-wider mb-2">Pro</div>
+        <div className="text-4xl font-bold text-zinc-100 mb-1">
+          $9<span className="text-lg font-normal text-zinc-500">/month</span>
         </div>
-        <p className="text-sm text-zinc-500 mb-6">Cancel anytime</p>
-        <ul className="space-y-2.5 text-sm text-zinc-700 mb-7">
+        <p className="text-xs text-zinc-600 mb-7">Cancel anytime</p>
+        <ul className="space-y-3 text-sm text-zinc-400 mb-7">
           {[
             'Unlimited active deals',
             'Email reminder 3 days before delivery',
@@ -34,8 +35,8 @@ export default async function UpgradePage() {
             'All platforms: YouTube, Instagram, TikTok',
             'Multi-currency support',
           ].map(f => (
-            <li key={f} className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-zinc-900 shrink-0" />
+            <li key={f} className="flex items-center gap-2.5">
+              <CheckCircle className="w-4 h-4 text-violet-500 shrink-0" />
               {f}
             </li>
           ))}

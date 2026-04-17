@@ -35,7 +35,7 @@ export default async function EditDealPage({ params }: { params: Promise<{ id: s
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-zinc-900 mb-6">Edit deal</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-6">Edit deal</h1>
       <DealForm deal={deal as Deal} userId={user.id} plan={plan} activeDealsCount={activeDealsCount} />
     </div>
   )
