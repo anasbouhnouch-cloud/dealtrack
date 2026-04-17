@@ -1,7 +1,7 @@
 export const metadata = { title: 'Terms of Service — DealTrack' }
 
 const EFFECTIVE = 'January 1, 2025'
-const CONTACT_EMAIL = 'legal@dealtrackapp.com'
+const CONTACT_EMAIL = 'support.dealtrack@gmail.com'
 
 export default function TermsPage() {
   return (
