@@ -11,7 +11,11 @@
       "Bash(git commit *)",
       "Bash(git config *)",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(where jq *)",
+      "Bash(bash -c \"cd C:/Users/micro/dealtrack && git add . && git diff --cached --quiet && echo 'nothing to commit' || \\(git commit -m 'auto update' && git push\\)\")"
     ]
   }
 }
