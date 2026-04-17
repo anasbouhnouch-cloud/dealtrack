@@ -39,7 +39,9 @@ export default function SignupPage() {
     <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <Link href="/" className="text-xl font-bold tracking-tight text-white">DealTrack</Link>
+          <Link href="/" className="text-xl font-bold tracking-tight">
+            <span className="text-white">Deal</span><span className="text-[#7C3AED]">Track</span>
+          </Link>
           <p className="text-sm text-zinc-500 mt-1.5">Create your account</p>
         </div>
 

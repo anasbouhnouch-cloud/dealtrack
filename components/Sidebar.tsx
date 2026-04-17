@@ -31,7 +31,9 @@ export default function Sidebar({ plan }: SidebarProps) {
   return (
     <aside className="w-56 shrink-0 hidden md:flex flex-col border-r border-white/[0.08] bg-[#0A0A0A] min-h-screen px-3 py-4">
       <div className="px-2 mb-7">
-        <span className="font-bold text-white text-base tracking-tight">DealTrack</span>
+        <span className="font-bold text-base tracking-tight">
+          <span className="text-white">Deal</span><span className="text-[#7C3AED]">Track</span>
+        </span>
       </div>
 
       <nav className="flex-1 space-y-0.5">
