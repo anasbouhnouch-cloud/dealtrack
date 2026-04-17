@@ -100,8 +100,8 @@ export default function ContactPage() {
 
       <p className="text-center text-sm text-zinc-600 mt-6">
         You can also email us directly at{' '}
-        <a href="mailto:hello@dealtrackapp.com" className="text-violet-400 hover:text-violet-300 transition-colors">
-          hello@dealtrackapp.com
+        <a href="mailto:support.dealtrack@gmail.com" className="text-violet-400 hover:text-violet-300 transition-colors">
+          support.dealtrack@gmail.com
         </a>
       </p>
     </div>
