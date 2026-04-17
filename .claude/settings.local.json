@@ -12,10 +12,26 @@
       "Bash(git config *)",
       "Bash(git remote *)",
       "Bash(git push *)",
+      "Bash(git diff *)",
+      "Bash(git status *)",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Bash(where jq *)",
-      "Bash(bash -c \"cd C:/Users/micro/dealtrack && git add . && git diff --cached --quiet && echo 'nothing to commit' || \\(git commit -m 'auto update' && git push\\)\")"
+      "Bash(python -c \"import json,sys; data=json.load\\(open\\('.claude/settings.local.json'\\)\\); hook=data['hooks']['PostToolUse'][0]['hooks'][0]; print\\('command:', hook['command']\\); print\\('matcher:', data['hooks']['PostToolUse'][0]['matcher']\\); print\\('JSON valid ✓'\\)\")",
+      "Bash(node -e \"const d=require\\('./.claude/settings.local.json'\\);const h=d.hooks.PostToolUse[0];console.log\\('matcher:',h.matcher\\);console.log\\('command:',h.hooks[0].command\\);console.log\\('JSON valid OK'\\)\")"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd C:/Users/micro/dealtrack && git add . && git diff --cached --quiet && echo 'nothing to commit' || (git commit -m 'auto update' && git push)",
+            "statusMessage": "Auto-committing and pushing..."
+          }
+        ]
+      }
     ]
   }
 }

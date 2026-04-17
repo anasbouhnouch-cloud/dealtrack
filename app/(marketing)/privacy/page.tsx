@@ -1,7 +1,7 @@
 export const metadata = { title: 'Privacy Policy — DealTrack' }
 
 const EFFECTIVE = 'January 1, 2025'
-const CONTACT_EMAIL = 'privacy@dealtrackapp.com'
+const CONTACT_EMAIL = 'support.dealtrack@gmail.com'
 
 export default function PrivacyPage() {
   return (
