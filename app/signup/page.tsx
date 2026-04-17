@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
@@ -9,6 +9,14 @@ function SignupForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const ref = searchParams.get('ref')
+
+  // Redirect already-authenticated users straight to the dashboard
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace('/dashboard')
+    })
+  }, [router])
 
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
