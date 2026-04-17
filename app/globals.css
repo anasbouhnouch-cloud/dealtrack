@@ -23,6 +23,27 @@ body {
   box-sizing: border-box;
 }
 
+/* Hero animated gradient */
+@keyframes heroShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-animated-bg {
+  background: linear-gradient(
+    135deg,
+    #0A0A0A 0%,
+    #0f0519 20%,
+    #1a0533 40%,
+    #0a1628 60%,
+    #091022 80%,
+    #0A0A0A 100%
+  );
+  background-size: 400% 400%;
+  animation: heroShift 20s ease infinite;
+}
+
 /* Native date/select inputs dark styling */
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.6);

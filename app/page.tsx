@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { CheckCircle, TrendingUp, Bell, Shield, Zap } from 'lucide-react'
+import HeroBackground from '@/components/HeroBackground'
 
 export default function LandingPage() {
   return (
@@ -25,8 +26,25 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-20 text-center">
+      {/* Hero — animated background wrapper */}
+      <div className="relative overflow-hidden">
+        {/* Slow-shifting gradient */}
+        <div className="hero-animated-bg absolute inset-0" />
+        {/* Floating particles */}
+        <HeroBackground />
+        {/* Central violet bloom — very faint */}
+        <div className="absolute inset-0 flex items-start justify-center pointer-events-none">
+          <div
+            className="w-[600px] h-[400px] rounded-full mt-[-80px]"
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, transparent 70%)',
+            }}
+          />
+        </div>
+        {/* Fade to solid black at the bottom so the rest of the page blends cleanly */}
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent pointer-events-none" />
+
+      <section className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-20 text-center">
         <div className="inline-flex items-center gap-2 bg-violet-500/10 text-violet-400 border border-violet-500/20 text-xs font-medium px-3 py-1.5 rounded-full mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
           Free plan available — no credit card required
@@ -58,6 +76,7 @@ export default function LandingPage() {
           </Link>
         </div>
       </section>
+      </div>{/* end hero animated wrapper */}
 
       {/* Features */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
