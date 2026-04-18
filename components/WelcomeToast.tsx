@@ -2,32 +2,11 @@
 
 import { useEffect, useState } from 'react'
 
-/**
- * Mounts invisibly inside the app layout.
- * When the URL contains ?welcome=1 (set by the login page on success),
- * shows a "Welcome back! 👋" toast, cleans the URL without a navigation,
- * then auto-dismisses after 4 seconds.
- *
- * Uses window.location directly (not useSearchParams) so no Suspense
- * boundary is needed and it works in every server-rendered layout.
- */
 export default function WelcomeToast() {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('welcome') !== '1') return
-
-    // Show immediately
-    setVisible(true)
-
-    // Silently strip ?welcome=1 from the address bar
-    const clean = new URL(window.location.href)
-    clean.searchParams.delete('welcome')
-    window.history.replaceState({}, '', clean.toString())
-
-    // Auto-dismiss
-    const t = setTimeout(() => setVisible(false), 4000)
+    const t = setTimeout(() => setVisible(false), 3000)
     return () => clearTimeout(t)
   }, [])
 
