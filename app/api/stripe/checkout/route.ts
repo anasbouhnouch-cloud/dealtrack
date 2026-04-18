@@ -1,12 +1,22 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe } from '@/lib/stripe'
+import type { Currency } from '@/lib/currency'
 
-export async function POST() {
+const VALID_CURRENCIES: Currency[] = ['USD', 'EUR', 'GBP']
+
+export async function POST(request: Request) {
   try {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+    // Parse optional currency from request body (sent by CheckoutButton)
+    let currency: Currency = 'USD'
+    try {
+      const body = await request.json()
+      if (VALID_CURRENCIES.includes(body.currency)) currency = body.currency
+    } catch { /* no body or invalid JSON — default to USD */ }
 
     // In production always use the canonical domain so the Stripe redirect
     // lands on dealtrackapp.com, never on a Vercel preview URL.
@@ -31,14 +41,21 @@ export async function POST() {
       await supabase.from('profiles').update({ stripe_customer_id: customerId }).eq('id', user.id)
     }
 
+    // Pick the price ID for the detected currency if configured, else fall back to USD price.
+    // To enable EUR/GBP billing: set STRIPE_PRO_PRICE_ID_EUR / STRIPE_PRO_PRICE_ID_GBP in env.
+    const priceId =
+      (currency === 'EUR' && process.env.STRIPE_PRO_PRICE_ID_EUR) ||
+      (currency === 'GBP' && process.env.STRIPE_PRO_PRICE_ID_GBP) ||
+      process.env.STRIPE_PRO_PRICE_ID!
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
-      line_items: [{ price: process.env.STRIPE_PRO_PRICE_ID!, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       mode: 'subscription',
       success_url: `${appUrl}/dashboard?upgraded=1`,
       cancel_url: `${appUrl}/upgrade`,
-      metadata: { user_id: user.id },
+      metadata: { user_id: user.id, currency },
     })
 
     if (!session.url) {
