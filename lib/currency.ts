@@ -13,23 +13,35 @@ const EU_COUNTRIES = new Set([
   'NL','PL','PT','RO','SE','SI','SK',
 ])
 
+// Module-level cache — the fetch fires once per page load.
+// Every component that calls detectCurrency() shares the same promise,
+// so they all resolve to the exact same value with no duplicate requests.
+let _cached: Promise<Currency> | null = null
+
 /**
  * Detects the visitor's currency via ipapi.co (free, no key required).
  * Returns 'USD' on any error or timeout.
+ *
+ * The result is memoised at module scope: multiple components calling this
+ * function will share one network request and always get the same currency.
  */
-export async function detectCurrency(): Promise<Currency> {
-  try {
-    const controller = new AbortController()
-    const tid = setTimeout(() => controller.abort(), 3000)
-    const res = await fetch('https://ipapi.co/json/', { signal: controller.signal })
-    clearTimeout(tid)
-    if (!res.ok) return 'USD'
-    const data: { country_code?: string } = await res.json()
-    const cc = data.country_code ?? ''
-    if (cc === 'GB') return 'GBP'
-    if (EU_COUNTRIES.has(cc)) return 'EUR'
-  } catch {
-    // network error, timeout, ad-blocker, etc.
-  }
-  return 'USD'
+export function detectCurrency(): Promise<Currency> {
+  if (_cached) return _cached
+  _cached = (async (): Promise<Currency> => {
+    try {
+      const controller = new AbortController()
+      const tid = setTimeout(() => controller.abort(), 3000)
+      const res = await fetch('https://ipapi.co/json/', { signal: controller.signal })
+      clearTimeout(tid)
+      if (!res.ok) return 'USD'
+      const data: { country_code?: string } = await res.json()
+      const cc = data.country_code ?? ''
+      if (cc === 'GB') return 'GBP'
+      if (EU_COUNTRIES.has(cc)) return 'EUR'
+    } catch {
+      // network error, timeout, ad-blocker — fall through to USD
+    }
+    return 'USD'
+  })()
+  return _cached
 }
