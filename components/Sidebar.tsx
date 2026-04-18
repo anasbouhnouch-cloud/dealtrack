@@ -55,7 +55,7 @@ export default function Sidebar({ plan }: SidebarProps) {
       </nav>
 
       <div className="space-y-1 border-t border-white/[0.08] pt-3 mt-3">
-        {plan === 'free' && (
+        {plan === 'free' ? (
           <Link
             href="/upgrade"
             className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-sm text-violet-400 bg-violet-500/10 hover:bg-violet-500/15 border border-violet-500/20 transition-all duration-200 font-medium"
@@ -63,12 +63,11 @@ export default function Sidebar({ plan }: SidebarProps) {
             <Zap className="w-4 h-4 shrink-0" />
             Upgrade to Pro
           </Link>
-        )}
-        {plan === 'pro' && (
-          <div className="px-2.5 py-1.5 flex items-center gap-1.5">
-            <span className="text-xs bg-violet-600 text-white px-2 py-0.5 rounded-full font-medium tracking-wide">
-              PRO
-            </span>
+        ) : (
+          <div className="flex items-center gap-2 px-2.5 py-2 rounded-lg border border-violet-500/20 bg-violet-500/[0.07]">
+            <Zap className="w-4 h-4 text-violet-400 shrink-0" />
+            <span className="text-sm text-violet-300 font-medium flex-1">Pro Plan</span>
+            <span className="text-violet-400 text-xs font-bold">✓</span>
           </div>
         )}
         <button
