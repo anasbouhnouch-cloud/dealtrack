@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { CheckCircle, TrendingUp, Bell, Shield, Zap } from 'lucide-react'
 import HeroBackground from '@/components/HeroBackground'
+import PriceTag from '@/components/PriceTag'
 
 export default function LandingPage() {
   return (
