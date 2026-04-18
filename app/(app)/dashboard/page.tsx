@@ -67,6 +67,8 @@ export default async function DashboardPage({
 
   return (
     <div>
+      <WelcomeToast />
+
       {/* When Stripe redirects back with ?upgraded=1, sync the plan in the background */}
       {upgraded && <UpgradeSync />}
 
