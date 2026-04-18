@@ -8,25 +8,39 @@ export default function Icon() {
     (
       <div
         style={{
-          background: '#7C3AED',
+          background: '#000000',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '7px',
+          borderRadius: '6px',
+          gap: '0px',
         }}
       >
         <span
           style={{
-            color: 'white',
-            fontSize: 13,
+            color: '#ffffff',
+            fontSize: 15,
             fontWeight: 800,
-            letterSpacing: '-0.5px',
             fontFamily: 'sans-serif',
+            letterSpacing: '-1px',
+            lineHeight: 1,
           }}
         >
-          DT
+          D
+        </span>
+        <span
+          style={{
+            color: '#7C3AED',
+            fontSize: 15,
+            fontWeight: 800,
+            fontFamily: 'sans-serif',
+            letterSpacing: '-1px',
+            lineHeight: 1,
+          }}
+        >
+          T
         </span>
       </div>
     ),
