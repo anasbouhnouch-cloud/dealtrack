@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { CheckCircle } from 'lucide-react'
 import CheckoutButton from '@/components/CheckoutButton'
+import PriceTag from '@/components/PriceTag'
 
 export default async function UpgradePage() {
   const supabase = await createClient()
