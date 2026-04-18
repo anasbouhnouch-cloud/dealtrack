@@ -9,12 +9,11 @@ export async function POST() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-    // Derive the app URL from the actual request host so it always matches
-    // the domain the user is on (dealtrackapp.com, localhost, etc.)
-    const headersList = await headers()
-    const host = headersList.get('x-forwarded-host') ?? headersList.get('host') ?? 'dealtrackapp.com'
-    const protocol = host.startsWith('localhost') ? 'http' : 'https'
-    const appUrl = `${protocol}://${host}`
+    // In production always use the canonical domain so the Stripe redirect
+    // lands on dealtrackapp.com, never on a Vercel preview URL.
+    const appUrl = process.env.NODE_ENV === 'development'
+      ? (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000')
+      : 'https://dealtrackapp.com'
 
     const { data: profile } = await supabase
       .from('profiles')
