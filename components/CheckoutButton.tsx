@@ -1,16 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { detectCurrency, CURRENCY_INFO, Currency } from '@/lib/currency'
 
 export default function CheckoutButton() {
+  const [currency, setCurrency] = useState<Currency>('USD')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    detectCurrency().then(setCurrency)
+  }, [])
 
   async function handleCheckout() {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/stripe/checkout', { method: 'POST' })
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currency }),
+      })
       let data: { url?: string; error?: string }
       try {
         data = await res.json()
@@ -30,6 +40,8 @@ export default function CheckoutButton() {
     }
   }
 
+  const { symbol, amount } = CURRENCY_INFO[currency]
+
   return (
     <div>
       {error && (
@@ -42,7 +54,7 @@ export default function CheckoutButton() {
         disabled={loading}
         className="w-full bg-violet-600 text-white py-3 rounded-lg text-sm font-semibold hover:bg-violet-700 transition-all duration-200 disabled:opacity-50"
       >
-        {loading ? 'Redirecting to checkout…' : 'Subscribe for $9/month'}
+        {loading ? 'Redirecting to checkout…' : `Subscribe for ${symbol}${amount}/month`}
       </button>
     </div>
   )
