@@ -157,7 +157,7 @@ export default function LandingPage() {
             </div>
             <div className="text-xs font-medium text-violet-400 uppercase tracking-wider mb-2">Pro</div>
             <div className="text-4xl font-bold text-zinc-100 mb-1">
-              $9<span className="text-lg font-normal text-zinc-500">/mo</span>
+              <PriceTag />
             </div>
             <p className="text-xs text-zinc-600 mb-5">Cancel anytime</p>
             <ul className="space-y-2.5 text-sm text-zinc-400 mb-7">
