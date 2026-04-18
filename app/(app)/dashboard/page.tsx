@@ -66,6 +66,9 @@ export default async function DashboardPage({
 
   return (
     <div>
+      {/* When Stripe redirects back with ?upgraded=1, sync the plan in the background */}
+      {upgraded && <UpgradeSync />}
+
       {upgraded && (
         <div className="flex items-center gap-3 bg-violet-500/10 border border-violet-500/25 rounded-xl px-4 py-3.5 mb-6">
           <Sparkles className="w-4 h-4 text-violet-400 shrink-0" />
