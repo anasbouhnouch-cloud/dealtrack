@@ -11,7 +11,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -23,11 +22,9 @@ export default function LoginPage() {
       setError(error.message)
       setLoading(false)
     } else {
-      setSuccess(true)
-      setTimeout(() => {
-        router.push('/dashboard')
-        router.refresh()
-      }, 1400)
+      // ?welcome=1 triggers the WelcomeToast on the dashboard
+      router.push('/dashboard?welcome=1')
+      router.refresh()
     }
   }
 
