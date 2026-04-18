@@ -20,7 +20,14 @@ function StatCard({ title, value, sub, icon }: { title: string; value: string; s
   )
 }
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const params = await searchParams
+  const upgraded = params.upgraded === '1'
+
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
