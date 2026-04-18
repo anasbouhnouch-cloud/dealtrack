@@ -1,3 +1,5 @@
+'use client' is not here — this stays a server component
+
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { Plus, TrendingUp, Clock, AlertCircle, CheckCircle2, Sparkles } from 'lucide-react'
@@ -7,6 +9,7 @@ import { startOfMonth, endOfMonth } from 'date-fns'
 import ReferralCard from '@/components/ReferralCard'
 import OnboardingGuide from '@/components/OnboardingGuide'
 import UpgradeSync from '@/components/UpgradeSync'
+import WelcomeToast from '@/components/WelcomeToast'
 
 function StatCard({ title, value, sub, icon }: { title: string; value: string; sub?: string; icon: React.ReactNode }) {
   return (
