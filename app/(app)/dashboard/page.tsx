@@ -6,6 +6,7 @@ import { Deal } from '@/types'
 import { startOfMonth, endOfMonth } from 'date-fns'
 import ReferralCard from '@/components/ReferralCard'
 import OnboardingGuide from '@/components/OnboardingGuide'
+import UpgradeSync from '@/components/UpgradeSync'
 
 function StatCard({ title, value, sub, icon }: { title: string; value: string; sub?: string; icon: React.ReactNode }) {
   return (
