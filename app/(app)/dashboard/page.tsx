@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { Plus, TrendingUp, Clock, AlertCircle, CheckCircle2 } from 'lucide-react'
+import { Plus, TrendingUp, Clock, AlertCircle, CheckCircle2, Sparkles } from 'lucide-react'
 import { formatCurrency, formatDate, daysUntil, isOverdue, statusColor, statusLabel } from '@/lib/utils'
 import { Deal } from '@/types'
 import { startOfMonth, endOfMonth } from 'date-fns'
