@@ -25,7 +25,7 @@ export default async function UpgradePage() {
       <div className="bg-[#111111] border border-violet-500/40 rounded-xl p-7 shadow-[0_0_50px_rgba(124,58,237,0.1)]">
         <div className="text-xs font-medium text-violet-400 uppercase tracking-wider mb-2">Pro</div>
         <div className="text-4xl font-bold text-zinc-100 mb-1">
-          $9<span className="text-lg font-normal text-zinc-500">/month</span>
+          <PriceTag suffix="/month" />
         </div>
         <p className="text-xs text-zinc-600 mb-7">Cancel anytime</p>
         <ul className="space-y-3 text-sm text-zinc-400 mb-7">
