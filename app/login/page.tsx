@@ -22,8 +22,7 @@ export default function LoginPage() {
       setError(error.message)
       setLoading(false)
     } else {
-      // ?welcome=1 triggers the WelcomeToast on the dashboard
-      router.push('/dashboard?welcome=1')
+      router.push('/dashboard')
       router.refresh()
     }
   }
