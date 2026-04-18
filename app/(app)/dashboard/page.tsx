@@ -1,5 +1,3 @@
-'use client' is not here — this stays a server component
-
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { Plus, TrendingUp, Clock, AlertCircle, CheckCircle2, Sparkles } from 'lucide-react'
