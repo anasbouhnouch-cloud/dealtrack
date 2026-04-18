@@ -65,6 +65,16 @@ export default async function DashboardPage({
 
   return (
     <div>
+      {upgraded && (
+        <div className="flex items-center gap-3 bg-violet-500/10 border border-violet-500/25 rounded-xl px-4 py-3.5 mb-6">
+          <Sparkles className="w-4 h-4 text-violet-400 shrink-0" />
+          <div>
+            <p className="text-sm font-semibold text-violet-300">You're now on Pro! 🎉</p>
+            <p className="text-xs text-violet-400/70 mt-0.5">Unlimited deals and automatic email reminders are now active.</p>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-7">
         <h1 className="text-xl font-bold text-zinc-100">Dashboard</h1>
         <Link
