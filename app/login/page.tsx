@@ -36,6 +36,18 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4">
+      {/* Success toast */}
+      {success && (
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-[#111111] border border-emerald-500/30 rounded-xl px-4 py-3.5 shadow-2xl shadow-black/40 min-w-[260px]">
+          <div className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+            <span className="text-emerald-400 text-xs font-bold">✓</span>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-zinc-100">Welcome back! 👋</p>
+            <p className="text-xs text-zinc-500 mt-0.5">Redirecting to dashboard…</p>
+          </div>
+        </div>
+      )}
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Link href="/" className="text-xl font-bold tracking-tight">
